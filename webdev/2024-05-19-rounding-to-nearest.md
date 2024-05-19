@@ -27,7 +27,7 @@ test it.
 ## Benchmarking
 
 ```js
-var testCeiling = 1_000_000;
+var testCeiling = 1_000_000_000;
 var trialCount = 101; // odd to make median straightforward
 
 function test() {
@@ -36,7 +36,7 @@ function test() {
   for (let trial = 0; trial < trialCount; trial++) {
     console.log(`running trial ${trial}...`);
     let start = performance.now();
-    for (let i = 0; i < 1_000_000; i++) {
+    for (let i = 0; i < testCeiling; i++) {
       roundWithModulo(i);
     }
     let end = performance.now();
@@ -96,6 +96,17 @@ got in Safari:
 ```
 round to nearest 1000 with modulo median time: 11
 round to nearest 1000 with division median time: 12
+```
+
+@me1000 reports these numbers on node vs Bun:
+
+```
+$ node ./bench.js
+round to nearest 1000 with modulo median time: 0.24670898914337158
+round to nearest 1000 with division median time: 0.8194580078125
+$ bun run ./bench.js
+round to nearest 1000 with modulo median time: 0.4555000000000007
+round to nearest 1000 with division median time: 0.5449589999999915
 ```
 
 Languages with distinct int/float types probably behave differently, and other
