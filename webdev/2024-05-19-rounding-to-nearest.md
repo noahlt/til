@@ -27,23 +27,25 @@ test it.
 ## Benchmarking
 
 ```js
-var testCeiling = 1_000_000_000;
+var testCeiling = 1_000_000;
 var trialCount = 101; // odd to make median straightforward
 
 function test() {
-  const data = { modTimes: [], divTimes: [] };
+  var data = { modTimes: [], divTimes: [] },
+    start = 0.0,
+    end = 0.0;
 
-  for (let trial = 0; trial < trialCount; trial++) {
+  for (var trial = 0; trial < trialCount; trial++) {
     console.log(`running trial ${trial}...`);
-    let start = performance.now();
-    for (let i = 0; i < testCeiling; i++) {
+    start = performance.now();
+    for (var i = 0; i < testCeiling; i++) {
       roundWithModulo(i);
     }
-    let end = performance.now();
+    end = performance.now();
     data.modTimes.push(end - start);
 
     start = performance.now();
-    for (let i = 0; i < testCeiling; i++) {
+    for (var i = 0; i < testCeiling; i++) {
       roundWithDivision(i);
     }
     end = performance.now();
