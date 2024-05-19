@@ -81,15 +81,12 @@ I tried bumping `testCeiling` to a billion:
 const testCeiling = 1_000_000_000;
 ```
 
-This made the float version much much slower:
+This yielded similar results (division ~2x the running time):
 
 ```
-round to nearest 1000 with integer operations median time: 0.30000001192092896
+round to nearest 1000 with modulo median time: 293.2999999821186
 round to nearest 1000 with float operations median time: 619.8000000119209
 ```
-
-I'm guessing this is because at that range, you have to start doing operations
-on the float's exponent rather than being entirely computing on the significand.
 
 ## Other runtimes
 
